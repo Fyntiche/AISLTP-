@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AISLTP", "AISLTP\AISLTP.csproj", "{D7A9B752-5D33-4630-A10F-2689A599BEF1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7A9B752-5D33-4630-A10F-2689A599BEF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7A9B752-5D33-4630-A10F-2689A599BEF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7A9B752-5D33-4630-A10F-2689A599BEF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7A9B752-5D33-4630-A10F-2689A599BEF1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9CF1997D-398B-499B-B7D5-E1307647D72E}
+	EndGlobalSection
+EndGlobal
