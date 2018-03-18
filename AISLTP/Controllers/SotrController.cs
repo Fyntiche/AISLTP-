@@ -11,24 +11,23 @@ namespace AISLTP.Controllers
 {
     public class SotrController : Controller
     {
-        // GET: Sotr
+        //
+        // GET: /Sotr/
         public ActionResult Index()
         {
             return View();
         }
-
-        //получения информации о сотрудниках
-        public JsonResult GetSotrs(string sidx , string sort , int page , int rows)
+        public JsonResult GetSotr(string sidx , string sort , int page , int rows , bool _search , string searchField ,  string searchOper , string searchString)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            sort = (sort == null) ? "" : sort;
+            sort = sort ?? "";
             int pageIndex = Convert.ToInt32( page ) - 1;
             int pageSize = rows;
 
             var SotrList = db.Sotrs.Select(
                     t => new
-                    {   
-                        t.Guid ,
+                    {
+                        t.ID ,
                         t.Cod_sotr ,
                         t.Ima ,
                         t.Fio ,
@@ -37,11 +36,32 @@ namespace AISLTP.Controllers
                         t.Sex ,
                         t.Dvi
                     } );
+            if (_search)
+            {
+                switch (searchField)
+                {
+                    case "Cod_sotr":
+                        SotrList = SotrList.Where( t => t.Cod_sotr.Contains( searchString ) );
+                        break;
+                    case "Ima":
+                        SotrList = SotrList.Where( t => t.Ima.Contains( searchString ) );
+                        break;
+                    case "Fio":
+                        SotrList = SotrList.Where( t => t.Fio.Contains( searchString ) );
+                        break;
+                    case "Otc":
+                        SotrList = SotrList.Where( t => t.Otc.Contains( searchString ) );
+                        break;
+                    case "Sex":
+                        SotrList = SotrList.Where( t => t.Sex.Contains( searchString ) );
+                        break;
+                }
+            }
             int totalRecords = SotrList.Count();
             var totalPages = ( int ) Math.Ceiling( ( float ) totalRecords / ( float ) rows );
             if (sort.ToUpper() == "DESC")
             {
-                SotrList = SotrList.OrderByDescending( t => t.Fio );
+                SotrList = SotrList.OrderByDescending( t => t.Ima );
                 SotrList = SotrList.Skip( pageIndex * pageSize ).Take( pageSize );
             }
             else
@@ -59,11 +79,8 @@ namespace AISLTP.Controllers
             return Json( jsonData , JsonRequestBehavior.AllowGet );
         }
 
-        /*Блог кода для создания, обновления и удаления.*/
-
-        //Для создания
         [HttpPost]
-        public string Create([Bind( Exclude = "Guid" )] SotrMaster Model)
+        public string Create([Bind( Exclude = "Id" )] Sotr Model)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             string msg;
@@ -71,15 +88,14 @@ namespace AISLTP.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    Model.Guid = Guid.NewGuid();
-                    
+                    Model.ID = Guid.NewGuid().ToString();
                     db.Sotrs.Add( Model );
                     db.SaveChanges();
-                    msg = "Успешно сохранено";
+                    msg = "Сохранено успешно";
                 }
                 else
                 {
-                    msg = "Данные не прошли проверку";
+                    msg = "Данные не прошли проверку ввода";
                 }
             }
             catch (Exception ex)
@@ -88,9 +104,7 @@ namespace AISLTP.Controllers
             }
             return msg;
         }
-
-        //Для обновления
-        public string Edit(SotrMaster Model)
+        public string Edit(Sotr Model)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             string msg;
@@ -100,11 +114,11 @@ namespace AISLTP.Controllers
                 {
                     db.Entry( Model ).State = EntityState.Modified;
                     db.SaveChanges();
-                    msg = "Успешно сохранено";
+                    msg = "Сохранено успешно";
                 }
                 else
                 {
-                    msg = "Данные не прошли проверку";
+                    msg = "Данные не прошли проверку ввода";
                 }
             }
             catch (Exception ex)
@@ -113,15 +127,14 @@ namespace AISLTP.Controllers
             }
             return msg;
         }
-
-        //Для удаления
-        public string Delete(string Guid)
+        public string Delete(string Id)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            SotrMaster sotr = db.Sotrs.Find( Guid );
-            db.Sotrs.Remove( sotr );
+            Sotr Sotr = db.Sotrs.Find( Id );
+            db.Sotrs.Remove( Sotr );
             db.SaveChanges();
             return "Удалено успешно";
         }
+
     }
 }

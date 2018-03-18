@@ -31,6 +31,6 @@ namespace AISLTP.Models
         {
             return new ApplicationDbContext();
         }
-        public DbSet<SotrMaster> Sotrs { get; set; }
+        public DbSet<Sotr> Sotrs { get; set; }
     }
 }
