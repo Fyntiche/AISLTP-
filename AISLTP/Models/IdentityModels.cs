@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AISLTP.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -24,10 +25,12 @@ namespace AISLTP.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+        public DbSet<SotrMaster> Sotrs { get; set; }
     }
 }
