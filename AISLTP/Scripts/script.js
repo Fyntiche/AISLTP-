@@ -1,20 +1,26 @@
-﻿$(function () {
+﻿/// <reference path="jquery.jqGrid.js" />
+$(function () {
     $("#jqGrid").jqGrid({
-        url: "/Court/GetCourt",
+        url: "/Sotr/GetSotr",
         datatype: 'json',
         mtype: 'Get',
-        colNames: ['ID', 'Название', 'Примечание',],
+        colNames: ['ID', 'Код сотрудника', 'Фамилия', 'Имя', 'Отчество', 'Дата рождения', 'Пол', 'Дата создания'],
         colModel: [
             { key: true, hidden: true, name: 'ID', index: 'ID', editable: true },
-            { key: false, name: 'Txt', index: 'Txt', editable: true },
-            { key: false, name: 'Prim', index: 'Prim', editable: true }],
+            { key: false, name: 'Cod_sotr', index: 'Cod_sotr', editable: true },
+            { key: false, name: 'Fio', index: 'Fio', editable: true },
+            { key: false, name: 'Ima', index: 'Ima', editable: true },
+            { key: false, name: 'Otc', index: 'Otc', editable: true },
+            { key: false, name: 'Dr', index: 'Dr', editable: true, formatter: 'date', formatoptions: { newformat: 'd/m/Y' } },
+            { key: false, name: 'Sex', index: 'Sex', editable: true },
+            { key: false, name: 'Dvi', index: 'Dvi', editable: true, formatter: 'date', formatoptions: { newformat: 'd/m/Y' } }],
         pager: jQuery('#jqControls'),
         rowNum: 10,
         rowList: [10, 20, 30, 40, 50],
         height: '100%',
         viewrecords: true,
-        caption: 'Записи о судах',
-        emptyrecords: 'Нет записей о судах для отображения',
+        caption: 'Записи сотрудников',
+        emptyrecords: 'Нет записей сотрудников для отображения',
         jsonReader: {
             root: "rows",
             page: "page",
@@ -27,11 +33,11 @@
         multiselect: false,
     }).navGrid('#jqControls', {
         edit: true, add: true, del: true, search: true,
-        searchtext: "Поиск суда", refresh: true
+        searchtext: "Поиск сотрудника", refresh: true
     },
         {
             zIndex: 100,
-            url: '/Court/Edit',
+            url: '/Sotr/Edit',
             closeOnEscape: true,
             closeAfterEdit: true,
             recreateForm: true,
@@ -43,7 +49,7 @@
         },
         {
             zIndex: 100,
-            url: "/Court/Create",
+            url: "/Sotr/Create",
             closeOnEscape: true,
             closeAfterAdd: true,
             afterComplete: function (response) {
@@ -54,11 +60,11 @@
         },
         {
             zIndex: 100,
-            url: "/Court/Delete",
+            url: "/Sotr/Delete",
             closeOnEscape: true,
             closeAfterDelete: true,
             recreateForm: true,
-            msg: "Вы действительно хотите удалить эту запись?",
+            msg: "Вы действительно хотите удалить это запись?",
             afterComplete: function (response) {
                 if (response.responseText) {
                     alert(response.responseText);
@@ -67,7 +73,7 @@
         },
         {
             zIndex: 100,
-            caption: "Поиск суда",
+            caption: "Поиск сотрудника",
             sopt: ['cn']
         });
 });
