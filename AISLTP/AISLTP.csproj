@@ -192,6 +192,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\Sp\CourtController.cs" />
     <Compile Include="Controllers\Sp\SotrController.cs" />
     <Compile Include="Controllers\Sp\SpController.cs" />
     <Compile Include="Entities\Court.cs" />
@@ -340,7 +341,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\script.js" />
+    <Content Include="Scripts\Sp\Courtscript.js" />
+    <Content Include="Scripts\Sp\Sotrscript.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -374,6 +376,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Sotr\Index.cshtml" />
+    <Content Include="Views\Court\Index.cshtml" />
     <Content Include="Views\Sp\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
