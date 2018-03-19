@@ -23,7 +23,7 @@ namespace AISLTP.Controllers
             sort = sort ?? "";
             int pageIndex = Convert.ToInt32( page ) - 1;
             int pageSize = rows;
-
+            
             var SotrList = db.Sotrs.Select(
                     t => new
                     {
@@ -43,6 +43,7 @@ namespace AISLTP.Controllers
                     case "Cod_sotr":
                         SotrList = SotrList.Where( t => t.Cod_sotr.Contains( searchString ) );
                         break;
+
                     case "Ima":
                         SotrList = SotrList.Where( t => t.Ima.Contains( searchString ) );
                         break;
@@ -52,9 +53,7 @@ namespace AISLTP.Controllers
                     case "Otc":
                         SotrList = SotrList.Where( t => t.Otc.Contains( searchString ) );
                         break;
-                    case "Sex":
-                        SotrList = SotrList.Where( t => t.Sex.Contains( searchString ) );
-                        break;
+                 
                 }
             }
             int totalRecords = SotrList.Count();
@@ -90,6 +89,7 @@ namespace AISLTP.Controllers
                 {
                     Model.ID = Guid.NewGuid().ToString();
                     db.Sotrs.Add( Model );
+      
                     db.SaveChanges();
                     msg = "Сохранено успешно";
                 }
